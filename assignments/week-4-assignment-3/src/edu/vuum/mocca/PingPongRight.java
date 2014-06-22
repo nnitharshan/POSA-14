@@ -48,15 +48,15 @@ public class PingPongRight {
 		 * String to print (either "ping!" or "pong"!) for each iteration.
 		 */
 		// TODO - You fill in here.
-		String name;
+		final String mStringToPrint;
 
 		/**
 		 * Two SimpleSemaphores use to alternate pings and pongs. You can use an
 		 * array of SimpleSemaphores or just define them as two data members.
 		 */
 		// TODO - You fill in here.
-		SimpleSemaphore s1;
-		SimpleSemaphore s2;
+		final SimpleSemaphore s1;
+		final SimpleSemaphore s2;
 
 		/**
 		 * Constructor initializes the data member(s).
@@ -65,7 +65,7 @@ public class PingPongRight {
 				SimpleSemaphore semaphoreOne, SimpleSemaphore semaphoreTwo,
 				int maxIterations) {
 			// TODO - You fill in here.
-			name = stringToPrint;
+			mStringToPrint = stringToPrint;
 			s1 = semaphoreOne;
 			s2 = semaphoreTwo;
 			mMaxLoopIterations = maxIterations;
@@ -82,13 +82,15 @@ public class PingPongRight {
 			 */
 
 			// TODO - You fill in here.
-			for (int loopsDone = 1; loopsDone <= mMaxLoopIterations; ++loopsDone) {
-				acquire();
-				System.out.println(name + "(" + loopsDone + ")");
-				release();
+			try {
+				for (int loopsDone = 1; loopsDone <= mMaxLoopIterations; ++loopsDone) {
+					acquire();
+					System.out.println(mStringToPrint + "(" + loopsDone + ")");
+					release();
+				}
+			} finally {
+				mLatch.countDown();
 			}
-
-			mLatch.countDown();
 		}
 
 		/**
