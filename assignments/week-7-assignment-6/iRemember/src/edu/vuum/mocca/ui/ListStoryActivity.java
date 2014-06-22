@@ -115,7 +115,8 @@ public class ListStoryActivity extends StoryActivityBase {
 		
 		// Set the click listener for the list view
 		lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-		    public void onItemClick(AdapterView<?> parent, View v, int position, long id){
+		    @Override
+			public void onItemClick(AdapterView<?> parent, View v, int position, long id){
 		    	Log.d(LOG_TAG, "onListItemClick");
 				Log.d(LOG_TAG,
 						"position: " + position + "id = "

@@ -201,6 +201,7 @@ public class StoryData implements Parcelable {
 	/**
 	 * Clone this object into a new StoryData
 	 */
+	@Override
 	public StoryData clone() {
 		return new StoryData(loginId, storyId, title, body, audioLink,
 				videoLink, imageName, imageLink, tags, creationTime, storyTime,
@@ -241,10 +242,12 @@ public class StoryData implements Parcelable {
 	 * Used for writing a copy of this object to a Parcel, do not manually call.
 	 */
 	public static final Parcelable.Creator<StoryData> CREATOR = new Parcelable.Creator<StoryData>() {
+		@Override
 		public StoryData createFromParcel(Parcel in) {
 			return new StoryData(in);
 		}
 
+		@Override
 		public StoryData[] newArray(int size) {
 			return new StoryData[size];
 		}

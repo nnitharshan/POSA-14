@@ -51,6 +51,7 @@ package edu.vuum.mocca.ui;
 import java.util.Calendar;
 import java.util.Locale;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
@@ -329,6 +330,7 @@ public class CreateStoryActivity extends StoryActivityBase {
 
 		// Define a listener that responds to location updates
 		LocationListener locationListener = new LocationListener() {
+			@Override
 			public void onLocationChanged(Location location) {
 				// Called when a new location is found by the network location
 				// provider.
@@ -341,11 +343,14 @@ public class CreateStoryActivity extends StoryActivityBase {
 			}
 
 			// We must define these to implement the interface, but we don't do anything when they're triggered.
+			@Override
 			public void onStatusChanged(String provider, int status,
 					Bundle extras) {
 			}
+			@Override
 			public void onProviderEnabled(String provider) {
 			}
+			@Override
 			public void onProviderDisabled(String provider) {
 			}
 		};
@@ -402,11 +407,11 @@ public class CreateStoryActivity extends StoryActivityBase {
 				+ requestCode + " resultCode:" + resultCode + "data:" + data);
 		
 		if (requestCode == CreateStoryActivity.CAMERA_PIC_REQUEST) {
-			if (resultCode == CreateStoryActivity.RESULT_OK) {
+			if (resultCode == Activity.RESULT_OK) {
 				// Image captured and saved to fileUri specified in the Intent
 				imagePathFinal = imagePath;
 				imageLocation.setText(imagePathFinal.toString());
-			} else if (resultCode == CreateStoryActivity.RESULT_CANCELED) {
+			} else if (resultCode == Activity.RESULT_CANCELED) {
 				// User cancelled the image capture
 			} else {
 				// Image capture failed, advise user

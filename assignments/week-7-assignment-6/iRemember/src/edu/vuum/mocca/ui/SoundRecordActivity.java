@@ -163,7 +163,8 @@ public class SoundRecordActivity extends Activity {
 
         // The click listener used to respond to clicks
         OnClickListener clicker = new OnClickListener() {
-            public void onClick(View v) {
+            @Override
+			public void onClick(View v) {
             	// Forward actual recording logic to the activity function
                 onRecord(mStartRecording);
                 
@@ -197,7 +198,8 @@ public class SoundRecordActivity extends Activity {
 
         // The click listener used to respond to clicks on this button
         OnClickListener clicker = new OnClickListener() {
-            public void onClick(View v) {
+            @Override
+			public void onClick(View v) {
             	// Forward actual audio playing logic to the activity
                 onPlay(mStartPlaying);
                 
