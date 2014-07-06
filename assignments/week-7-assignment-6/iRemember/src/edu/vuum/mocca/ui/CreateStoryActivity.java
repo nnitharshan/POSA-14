@@ -113,7 +113,8 @@ public class CreateStoryActivity extends StoryActivityBase {
 
 	DatePicker storyDate;
 
-	Uri imagePath;
+	static Uri imagePath; // Making this static keeps it from getting GC'd when
+							// we take pictures
 	Uri fileUri;
 	String audioPath;
 	Location loc;
@@ -328,7 +329,6 @@ public class CreateStoryActivity extends StoryActivityBase {
 
 		// Define a listener that responds to location updates
 		LocationListener locationListener = new LocationListener() {
-			@Override
 			public void onLocationChanged(Location location) {
 				// Called when a new location is found by the network location
 				// provider.
@@ -343,16 +343,13 @@ public class CreateStoryActivity extends StoryActivityBase {
 
 			// We must define these to implement the interface, but we don't do
 			// anything when they're triggered.
-			@Override
 			public void onStatusChanged(String provider, int status,
 					Bundle extras) {
 			}
 
-			@Override
 			public void onProviderEnabled(String provider) {
 			}
 
-			@Override
 			public void onProviderDisabled(String provider) {
 			}
 		};
@@ -422,8 +419,16 @@ public class CreateStoryActivity extends StoryActivityBase {
 						"Image capture failed.", Toast.LENGTH_LONG).show();
 			}
 		} else if (requestCode == CreateStoryActivity.MIC_SOUND_REQUEST) {
-			audioPath = (String) data.getExtras().get("data"); // Line 419
-			audioLocation.setText(audioPath.toString());
+			// If we successfully recorded sound, grab the results.
+			if (resultCode == SoundRecordActivity.RESULT_OK) {
+				audioPath = (String) data.getExtras().get("data"); // Line 421
+				audioLocation.setText(audioPath.toString());
+			}
+			// If not, let the user know.
+			else {
+				Toast.makeText(this, "Sound capture failed.", Toast.LENGTH_LONG)
+						.show();
+			}
 		}
 	}
 }

@@ -89,4 +89,5 @@ public class DownloadIntentService extends IntentService {
 
 		DownloadUtils.downloadAndRespond(this, intent.getData(), messenger);
 	}
+
 }
